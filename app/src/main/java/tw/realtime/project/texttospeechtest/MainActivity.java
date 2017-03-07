@@ -3,6 +3,7 @@ package tw.realtime.project.texttospeechtest;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -69,6 +70,21 @@ public class MainActivity extends AppCompatActivity {
             mTextToSpeech.stop();
             mTextToSpeech.shutdown();
             mTextToSpeech = null;
+        }
+    }
+
+    private class UtteranceProgressCallback extends UtteranceProgressListener {
+        @Override
+        public void onStart(String utteranceId){
+            Log.i(getLogTag(), "UtteranceProgressListener [Text to Speech Start]: " + utteranceId);
+        }
+        @Override
+        public void onDone(String utteranceId) {
+            Log.i("MapPage", "UtteranceProgressListener [Text to Speech Done]: " + utteranceId);
+        }
+
+        @Override
+        public void onError(String utteranceId){
         }
     }
 
